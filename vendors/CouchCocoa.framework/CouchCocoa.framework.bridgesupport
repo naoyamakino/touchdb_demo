@@ -1,0 +1,1595 @@
+<?xml version='1.0'?>
+<signatures version='1.0'>
+<constant const='true' declared_type='NSString*' name='CouchEmbeddedServerDidRestartNotification' type='@'/>
+<constant const='true' declared_type='NSString*' name='CouchEmbeddedServerDidStartNotification' type='@'/>
+<constant const='true' declared_type='NSString*' name='CouchHTTPErrorDomain' type='@'/>
+<constant declared_type='int' name='gCouchLogLevel' type='i'/>
+<constant declared_type='RESTLogLevel' name='gRESTLogLevel' type='i'/>
+<constant const='true' declared_type='NSString*' name='kCouchDBErrorDomain' type='@'/>
+<constant const='true' declared_type='NSString*' name='kCouchDatabaseChangeNotification' type='@'/>
+<constant const='true' declared_type='NSString*' name='kCouchDocumentChangeNotification' type='@'/>
+<constant const='true' declared_type='NSString*' name='kCouchLanguageErlang' type='@'/>
+<constant const='true' declared_type='NSString*' name='kCouchLanguageJavaScript' type='@'/>
+<enum name='kCouchReplicationActive' value='3'/>
+<enum name='kCouchReplicationIdle' value='2'/>
+<enum name='kCouchReplicationOffline' value='1'/>
+<enum name='kCouchReplicationStopped' value='0'/>
+<enum name='kCouchStaleNever' value='0'/>
+<enum name='kCouchStaleOK' value='1'/>
+<enum name='kCouchStaleUpdateAfter' value='2'/>
+<enum name='kRESTLogNothing' value='0'/>
+<enum name='kRESTLogRequestHeaders' value='2'/>
+<enum name='kRESTLogRequestURLs' value='1'/>
+<enum name='kReplicationCompleted' value='2'/>
+<enum name='kReplicationError' value='3'/>
+<enum name='kReplicationIdle' value='0'/>
+<enum name='kReplicationTriggered' value='1'/>
+<class name='CouchAttachment'>
+<method selector='PUT:'>
+<arg declared_type='NSData*' index='0' name='body' type='@'/>
+<retval declared_type='RESTOperation*' type='@'/>
+</method>
+<method selector='PUT:contentType:'>
+<arg declared_type='NSData*' index='0' name='body' type='@'/>
+<arg declared_type='NSString*' index='1' name='contentType' type='@'/>
+<retval declared_type='RESTOperation*' type='@'/>
+</method>
+<method selector='body'>
+<retval declared_type='NSData*' type='@'/>
+</method>
+<method selector='contentType'>
+<retval declared_type='NSString*' type='@'/>
+</method>
+<method selector='document'>
+<retval declared_type='CouchDocument*' type='@'/>
+</method>
+<method selector='length'>
+<retval declared_type='UInt64' type='Q'/>
+</method>
+<method selector='metadata'>
+<retval declared_type='NSDictionary*' type='@'/>
+</method>
+<method selector='name'>
+<retval declared_type='NSString*' type='@'/>
+</method>
+<method selector='revision'>
+<retval declared_type='CouchRevision*' type='@'/>
+</method>
+<method selector='setBody:'>
+<arg declared_type='NSData*' index='0' name='body' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='unversionedURL'>
+<retval declared_type='NSURL*' type='@'/>
+</method>
+</class>
+<class name='CouchDatabase'>
+<method selector='clearDocumentCache'>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='compact'>
+<retval declared_type='RESTOperation*' type='@'/>
+</method>
+<method selector='create'>
+<retval declared_type='RESTOperation*' type='@'/>
+</method>
+<method selector='databaseNamed:onServerWithURL:' class_method='true'>
+<arg declared_type='NSString*' index='0' name='databaseName' type='@'/>
+<arg declared_type='NSURL*' index='1' name='serverURL' type='@'/>
+<retval declared_type='CouchDatabase*' type='@'/>
+</method>
+<method selector='databaseWithURL:' class_method='true'>
+<arg declared_type='NSURL*' index='0' name='databaseURL' type='@'/>
+<retval declared_type='CouchDatabase*' type='@'/>
+</method>
+<method selector='deleteDocuments:'>
+<arg declared_type='NSArray*' index='0' name='documents' type='@'/>
+<retval declared_type='RESTOperation*' type='@'/>
+</method>
+<method selector='deleteRevisions:'>
+<arg declared_type='NSArray*' index='0' name='revisions' type='@'/>
+<retval declared_type='RESTOperation*' type='@'/>
+</method>
+<method selector='designDocumentWithName:'>
+<arg declared_type='NSString*' index='0' name='name' type='@'/>
+<retval declared_type='CouchDesignDocument*' type='@'/>
+</method>
+<method selector='documentPathMap'>
+<retval declared_type='CouchDocumentPathMap' type='@?' function_pointer='true'>
+<arg declared_type='NSString*' type='@'/>
+<retval declared_type='NSString*' type='@'/>
+</retval>
+</method>
+<method selector='documentWithID:'>
+<arg declared_type='NSString*' index='0' name='docID' type='@'/>
+<retval declared_type='CouchDocument*' type='@'/>
+</method>
+<method selector='ensureCreated:'>
+<arg declared_type='NSError**' index='0' name='outError' type='^@'/>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='getAllDocuments'>
+<retval declared_type='CouchQuery*' type='@'/>
+</method>
+<method selector='getDocumentCount'>
+<retval declared_type='NSInteger' type='i'/>
+</method>
+<method selector='getDocumentsWithIDs:'>
+<arg declared_type='NSArray*' index='0' name='docIDs' type='@'/>
+<retval declared_type='CouchQuery*' type='@'/>
+</method>
+<method selector='lastSequenceNumber'>
+<retval declared_type='NSUInteger' type='I'/>
+</method>
+<method selector='modelFactory'>
+<retval declared_type='CouchModelFactory*' type='@'/>
+</method>
+<method selector='objectForKeyedSubscript:'>
+<arg declared_type='NSString*' index='0' name='key' type='@'/>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='pullFromDatabaseAtURL:'>
+<arg declared_type='NSURL*' index='0' name='sourceURL' type='@'/>
+<retval declared_type='CouchReplication*' type='@'/>
+</method>
+<method selector='purgeDocuments:'>
+<arg declared_type='NSArray*' index='0' name='documents' type='@'/>
+<retval declared_type='RESTOperation*' type='@'/>
+</method>
+<method selector='pushToDatabaseAtURL:'>
+<arg declared_type='NSURL*' index='0' name='targetURL' type='@'/>
+<retval declared_type='CouchReplication*' type='@'/>
+</method>
+<method selector='putChanges:'>
+<arg declared_type='NSArray*' index='0' name='properties' type='@'/>
+<retval declared_type='RESTOperation*' type='@'/>
+</method>
+<method selector='putChanges:toRevisions:'>
+<arg declared_type='NSArray*' index='0' name='properties' type='@'/>
+<arg declared_type='NSArray*' index='1' name='revisions' type='@'/>
+<retval declared_type='RESTOperation*' type='@'/>
+</method>
+<method selector='replicateWithURL:exclusively:'>
+<arg declared_type='NSURL*' index='0' name='otherURL' type='@'/>
+<arg declared_type='BOOL' index='1' name='exclusively' type='B'/>
+<retval declared_type='NSArray*' type='@'/>
+</method>
+<method selector='replicationFromDatabaseAtURL:'>
+<arg declared_type='NSURL*' index='0' name='sourceURL' type='@'/>
+<retval declared_type='CouchPersistentReplication*' type='@'/>
+</method>
+<method selector='replicationToDatabaseAtURL:'>
+<arg declared_type='NSURL*' index='0' name='targetURL' type='@'/>
+<retval declared_type='CouchPersistentReplication*' type='@'/>
+</method>
+<method selector='replications'>
+<retval declared_type='NSArray*' type='@'/>
+</method>
+<method selector='server'>
+<retval declared_type='CouchServer*' type='@'/>
+</method>
+<method selector='setDocumentPathMap:'>
+<arg declared_type='CouchDocumentPathMap' index='0' name='documentPathMap' type='@?' function_pointer='true'>
+<arg declared_type='NSString*' type='@'/>
+<retval declared_type='NSString*' type='@'/>
+</arg>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setLastSequenceNumber:'>
+<arg declared_type='NSUInteger' index='0' name='lastSequenceNumber' type='I'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setModelFactory:'>
+<arg declared_type='CouchModelFactory*' index='0' name='modelFactory' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setTracksChanges:'>
+<arg declared_type='BOOL' index='0' name='tracksChanges' type='B'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='slowQueryWithMap:'>
+<arg declared_type='NSString*' index='0' name='map' type='@'/>
+<retval declared_type='CouchQuery*' type='@'/>
+</method>
+<method selector='slowQueryWithMap:reduce:language:'>
+<arg declared_type='NSString*' index='0' name='map' type='@'/>
+<arg declared_type='NSString*' index='1' name='reduce' type='@'/>
+<arg declared_type='NSString*' index='2' name='language' type='@'/>
+<retval declared_type='CouchQuery*' type='@'/>
+</method>
+<method selector='tracksChanges'>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='untitledDocument'>
+<retval declared_type='CouchDocument*' type='@'/>
+</method>
+</class>
+<class name='CouchDesignDocument'>
+<method selector='changed'>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='defineFilterNamed:asFunction:'>
+<arg declared_type='NSString*' index='0' name='filterName' type='@'/>
+<arg declared_type='NSString*' index='1' name='filterFunction' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='defineFilterNamed:block:'>
+<arg declared_type='NSString*' index='0' name='filterName' type='@'/>
+<arg declared_type='id' index='1' name='filterBlock' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='defineViewNamed:map:'>
+<arg declared_type='NSString*' index='0' name='viewName' type='@'/>
+<arg declared_type='NSString*' index='1' name='mapFunction' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='defineViewNamed:map:reduce:'>
+<arg declared_type='NSString*' index='0' name='viewName' type='@'/>
+<arg declared_type='NSString*' index='1' name='mapFunction' type='@'/>
+<arg declared_type='NSString*' index='2' name='reduceFunction' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='defineViewNamed:mapBlock:reduceBlock:version:'>
+<arg declared_type='NSString*' index='0' name='viewName' type='@'/>
+<arg declared_type='id' index='1' name='mapBlock' type='@'/>
+<arg declared_type='id' index='2' name='reduceBlock' type='@'/>
+<arg declared_type='NSString*' index='3' name='version' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='defineViewNamed:mapBlock:version:'>
+<arg declared_type='NSString*' index='0' name='viewName' type='@'/>
+<arg declared_type='id' index='1' name='mapBlock' type='@'/>
+<arg declared_type='NSString*' index='2' name='version' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='filters'>
+<retval declared_type='NSDictionary*' type='@'/>
+</method>
+<method selector='includeLocalSequence'>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='isLanguageAvailable:'>
+<arg declared_type='NSString*' index='0' name='language' type='@'/>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='language'>
+<retval declared_type='NSString*' type='@'/>
+</method>
+<method selector='mapFunctionOfViewNamed:'>
+<arg declared_type='NSString*' index='0' name='viewName' type='@'/>
+<retval declared_type='NSString*' type='@'/>
+</method>
+<method selector='queryViewNamed:'>
+<arg declared_type='NSString*' index='0' name='viewName' type='@'/>
+<retval declared_type='CouchQuery*' type='@'/>
+</method>
+<method selector='reduceFunctionOfViewNamed:'>
+<arg declared_type='NSString*' index='0' name='viewName' type='@'/>
+<retval declared_type='NSString*' type='@'/>
+</method>
+<method selector='saveChanges'>
+<retval declared_type='RESTOperation*' type='@'/>
+</method>
+<method selector='setIncludeLocalSequence:'>
+<arg declared_type='BOOL' index='0' name='includeLocalSequence' type='B'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setLanguage:'>
+<arg declared_type='NSString*' index='0' name='language' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setValidation:'>
+<arg declared_type='NSString*' index='0' name='validation' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setValidationBlock:'>
+<arg declared_type='id' index='0' name='validationBlock' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='validation'>
+<retval declared_type='NSString*' type='@'/>
+</method>
+<method selector='viewNames'>
+<retval declared_type='NSArray*' type='@'/>
+</method>
+</class>
+<class name='CouchDocument'>
+<method selector='abbreviatedID'>
+<retval declared_type='NSString*' type='@'/>
+</method>
+<method selector='currentRevision'>
+<retval declared_type='CouchRevision*' type='@'/>
+</method>
+<method selector='currentRevisionID'>
+<retval declared_type='NSString*' type='@'/>
+</method>
+<method selector='documentID'>
+<retval declared_type='NSString*' type='@'/>
+</method>
+<method selector='getConflictingRevisions'>
+<retval declared_type='NSArray*' type='@'/>
+</method>
+<method selector='getLeafRevisions'>
+<retval declared_type='NSArray*' type='@'/>
+</method>
+<method selector='getRevisionHistory'>
+<retval declared_type='NSArray*' type='@'/>
+</method>
+<method selector='isDeleted'>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='modelObject'>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='objectForKeyedSubscript:'>
+<arg declared_type='NSString*' index='0' name='key' type='@'/>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='properties'>
+<retval declared_type='NSDictionary*' type='@'/>
+</method>
+<method selector='propertyForKey:'>
+<arg declared_type='NSString*' index='0' name='key' type='@'/>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='putProperties:'>
+<arg declared_type='NSDictionary*' index='0' name='properties' type='@'/>
+<retval declared_type='RESTOperation*' type='@'/>
+</method>
+<method selector='resolveConflictingRevisions:withProperties:'>
+<arg declared_type='NSArray*' index='0' name='conflicts' type='@'/>
+<arg declared_type='NSDictionary*' index='1' name='properties' type='@'/>
+<retval declared_type='RESTOperation*' type='@'/>
+</method>
+<method selector='resolveConflictingRevisions:withRevision:'>
+<arg declared_type='NSArray*' index='0' name='conflicts' type='@'/>
+<arg declared_type='CouchRevision*' index='1' name='winningRevision' type='@'/>
+<retval declared_type='RESTOperation*' type='@'/>
+</method>
+<method selector='revisionWithID:'>
+<arg declared_type='NSString*' index='0' name='revisionID' type='@'/>
+<retval declared_type='CouchRevision*' type='@'/>
+</method>
+<method selector='setModelObject:'>
+<arg declared_type='id' index='0' name='modelObject' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='userProperties'>
+<retval declared_type='NSDictionary*' type='@'/>
+</method>
+</class>
+<class name='CouchDynamicObject'>
+<method selector='classOfProperty:' class_method='true'>
+<arg declared_type='NSString*' index='0' name='propertyName' type='@'/>
+<retval declared_type='Class' type='#'/>
+</method>
+<method selector='getValueOfProperty:'>
+<arg declared_type='NSString*' index='0' name='property' type='@'/>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='getterKey:' class_method='true'>
+<arg declared_type='SEL' index='0' name='sel' type=':'/>
+<retval declared_type='NSString*' type='@'/>
+</method>
+<method selector='impForGetterOfProperty:ofClass:' class_method='true'>
+<arg declared_type='NSString*' index='0' name='property' type='@'/>
+<arg declared_type='Class' index='1' name='propertyClass' type='#'/>
+<retval declared_type='IMP' type='^?' function_pointer='true'>
+<arg declared_type='id' type='@'/>
+<arg declared_type='SEL' type=':'/>
+<retval declared_type='id' type='@'/>
+</retval>
+</method>
+<method selector='impForGetterOfProperty:ofType:' class_method='true'>
+<arg declared_type='NSString*' index='0' name='property' type='@'/>
+<arg const='true' declared_type='char*' index='1' name='propertyType' type='*'/>
+<retval declared_type='IMP' type='^?' function_pointer='true'>
+<arg declared_type='id' type='@'/>
+<arg declared_type='SEL' type=':'/>
+<retval declared_type='id' type='@'/>
+</retval>
+</method>
+<method selector='impForSetterOfProperty:ofClass:' class_method='true'>
+<arg declared_type='NSString*' index='0' name='property' type='@'/>
+<arg declared_type='Class' index='1' name='propertyClass' type='#'/>
+<retval declared_type='IMP' type='^?' function_pointer='true'>
+<arg declared_type='id' type='@'/>
+<arg declared_type='SEL' type=':'/>
+<retval declared_type='id' type='@'/>
+</retval>
+</method>
+<method selector='impForSetterOfProperty:ofType:' class_method='true'>
+<arg declared_type='NSString*' index='0' name='property' type='@'/>
+<arg const='true' declared_type='char*' index='1' name='propertyType' type='*'/>
+<retval declared_type='IMP' type='^?' function_pointer='true'>
+<arg declared_type='id' type='@'/>
+<arg declared_type='SEL' type=':'/>
+<retval declared_type='id' type='@'/>
+</retval>
+</method>
+<method selector='propertyNames' class_method='true'>
+<retval declared_type='NSSet*' type='@'/>
+</method>
+<method selector='setValue:ofProperty:'>
+<arg declared_type='id' index='0' name='value' type='@'/>
+<arg declared_type='NSString*' index='1' name='property' type='@'/>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='setterKey:' class_method='true'>
+<arg declared_type='SEL' index='0' name='sel' type=':'/>
+<retval declared_type='NSString*' type='@'/>
+</method>
+</class>
+<class name='CouchEmbeddedServer'>
+<method selector='couchbase'>
+<retval declared_type='CouchbaseMobile*' type='@'/>
+</method>
+<method selector='error'>
+<retval declared_type='NSError*' type='@'/>
+</method>
+<method selector='init'>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='initWithURL:'>
+<arg declared_type='NSURL*' index='0' name='url' type='@'/>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='running'>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='sharedInstance' class_method='true'>
+<retval declared_type='CouchEmbeddedServer*' type='@'/>
+</method>
+<method selector='start:'>
+<arg declared_type='void (^)()' index='0' name='onStartBlock' type='@?' function_pointer='true'>
+<retval declared_type='void' type='v'/>
+</arg>
+<retval declared_type='BOOL' type='B'/>
+</method>
+</class>
+<class name='CouchLiveQuery'>
+<method selector='rows'>
+<retval declared_type='CouchQueryEnumerator*' type='@'/>
+</method>
+<method selector='wait'>
+<retval declared_type='BOOL' type='B'/>
+</method>
+</class>
+<class name='CouchModel'>
+<method selector='attachmentNamed:'>
+<arg declared_type='NSString*' index='0' name='name' type='@'/>
+<retval declared_type='CouchAttachment*' type='@'/>
+</method>
+<method selector='attachmentNames'>
+<retval declared_type='NSArray*' type='@'/>
+</method>
+<method selector='autosaves'>
+<retval declared_type='_Bool' type='B'/>
+</method>
+<method selector='createAttachmentWithName:type:body:'>
+<arg declared_type='NSString*' index='0' name='name' type='@'/>
+<arg declared_type='NSString*' index='1' name='contentType' type='@'/>
+<arg declared_type='NSData*' index='2' name='body' type='@'/>
+<retval declared_type='CouchAttachment*' type='@'/>
+</method>
+<method selector='database'>
+<retval declared_type='CouchDatabase*' type='@'/>
+</method>
+<method selector='databaseForModelProperty:'>
+<arg declared_type='NSString*' index='0' name='propertyName' type='@'/>
+<retval declared_type='CouchDatabase*' type='@'/>
+</method>
+<method selector='deleteDocument'>
+<retval declared_type='RESTOperation*' type='@'/>
+</method>
+<method selector='didLoadFromDocument'>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='document'>
+<retval declared_type='CouchDocument*' type='@'/>
+</method>
+<method selector='getValueOfProperty:'>
+<arg declared_type='NSString*' index='0' name='property' type='@'/>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='idForNewDocumentInDatabase:'>
+<arg declared_type='CouchDatabase*' index='0' name='db' type='@'/>
+<retval declared_type='NSString*' type='@'/>
+</method>
+<method selector='init'>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='initWithDocument:'>
+<arg declared_type='CouchDocument*' index='0' name='document' type='@'/>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='initWithNewDocumentInDatabase:'>
+<arg declared_type='CouchDatabase*' index='0' name='database' type='@'/>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='isNew'>
+<retval declared_type='_Bool' type='B'/>
+</method>
+<method selector='markExternallyChanged'>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='modelForDocument:' class_method='true'>
+<arg declared_type='CouchDocument*' index='0' name='document' type='@'/>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='needsSave'>
+<retval declared_type='_Bool' type='B'/>
+</method>
+<method selector='propertiesToSave'>
+<retval declared_type='NSDictionary*' type='@'/>
+</method>
+<method selector='removeAttachmentNamed:'>
+<arg declared_type='NSString*' index='0' name='name' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='save'>
+<retval declared_type='RESTOperation*' type='@'/>
+</method>
+<method selector='saveModels:' class_method='true'>
+<arg declared_type='NSArray*' index='0' name='models' type='@'/>
+<retval declared_type='RESTOperation*' type='@'/>
+</method>
+<method selector='setAutosaves:'>
+<arg declared_type='_Bool' index='0' name='autosaves' type='B'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setDatabase:'>
+<arg declared_type='CouchDatabase*' index='0' name='database' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setValue:ofProperty:'>
+<arg declared_type='id' index='0' name='value' type='@'/>
+<arg declared_type='NSString*' index='1' name='property' type='@'/>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='timeSinceExternallyChanged'>
+<retval declared_type='NSTimeInterval' type='d'/>
+</method>
+</class>
+<class name='CouchModelFactory'>
+<method selector='classForDocument:'>
+<arg declared_type='CouchDocument*' index='0' name='document' type='@'/>
+<retval declared_type='Class' type='#'/>
+</method>
+<method selector='classForDocumentType:'>
+<arg declared_type='NSString*' index='0' name='type' type='@'/>
+<retval declared_type='Class' type='#'/>
+</method>
+<method selector='modelForDocument:'>
+<arg declared_type='CouchDocument*' index='0' name='document' type='@'/>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='registerClass:forDocumentType:'>
+<arg declared_type='id' index='0' name='classOrName' type='@'/>
+<arg declared_type='NSString*' index='1' name='type' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='sharedInstance' class_method='true'>
+<retval declared_type='CouchModelFactory*' type='@'/>
+</method>
+</class>
+<class name='CouchPersistentReplication'>
+<method selector='OAuth'>
+<retval declared_type='NSDictionary*' type='@'/>
+</method>
+<method selector='actAsAdmin'>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='actAsUser:withRoles:'>
+<arg declared_type='NSString*' index='0' name='username' type='@'/>
+<arg declared_type='NSArray*' index='1' name='roles' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='completed'>
+<retval declared_type='unsigned int' type='I'/>
+</method>
+<method selector='continuous'>
+<retval declared_type='_Bool' type='B'/>
+</method>
+<method selector='create_target'>
+<retval declared_type='_Bool' type='B'/>
+</method>
+<method selector='doc_ids'>
+<retval declared_type='NSArray*' type='@'/>
+</method>
+<method selector='error'>
+<retval declared_type='NSError*' type='@'/>
+</method>
+<method selector='filter'>
+<retval declared_type='NSString*' type='@'/>
+</method>
+<method selector='headers'>
+<retval declared_type='NSDictionary*' type='@'/>
+</method>
+<method selector='localDatabase'>
+<retval declared_type='CouchDatabase*' type='@'/>
+</method>
+<method selector='mode'>
+<retval declared_type='CouchReplicationMode' type='i'/>
+</method>
+<method selector='pull'>
+<retval declared_type='_Bool' type='B'/>
+</method>
+<method selector='query_params'>
+<retval declared_type='NSDictionary*' type='@'/>
+</method>
+<method selector='remoteURL'>
+<retval declared_type='NSURL*' type='@'/>
+</method>
+<method selector='restart'>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setContinuous:'>
+<arg declared_type='_Bool' index='0' name='continuous' type='B'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setCreate_target:'>
+<arg declared_type='_Bool' index='0' name='create_target' type='B'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setDoc_ids:'>
+<arg declared_type='NSArray*' index='0' name='doc_ids' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setFilter:'>
+<arg declared_type='NSString*' index='0' name='filter' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setHeaders:'>
+<arg declared_type='NSDictionary*' index='0' name='headers' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setOAuth:'>
+<arg declared_type='NSDictionary*' index='0' name='OAuth' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setQuery_params:'>
+<arg declared_type='NSDictionary*' index='0' name='query_params' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='state'>
+<retval declared_type='CouchReplicationState' type='i'/>
+</method>
+<method selector='total'>
+<retval declared_type='unsigned int' type='I'/>
+</method>
+</class>
+<class name='CouchQuery'>
+<method selector='asLiveQuery'>
+<retval declared_type='CouchLiveQuery*' type='@'/>
+</method>
+<method selector='descending'>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='designDocument'>
+<retval declared_type='CouchDesignDocument*' type='@'/>
+</method>
+<method selector='endKey'>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='endKeyDocID'>
+<retval declared_type='NSString*' type='@'/>
+</method>
+<method selector='error'>
+<retval declared_type='NSError*' type='@'/>
+</method>
+<method selector='groupLevel'>
+<retval declared_type='NSUInteger' type='I'/>
+</method>
+<method selector='includeDeleted'>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='keys'>
+<retval declared_type='NSArray*' type='@'/>
+</method>
+<method selector='limit'>
+<retval declared_type='NSUInteger' type='I'/>
+</method>
+<method selector='prefetch'>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='rows'>
+<retval declared_type='CouchQueryEnumerator*' type='@'/>
+</method>
+<method selector='rowsIfChanged'>
+<retval declared_type='CouchQueryEnumerator*' type='@'/>
+</method>
+<method selector='sequences'>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='setDescending:'>
+<arg declared_type='BOOL' index='0' name='descending' type='B'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setEndKey:'>
+<arg declared_type='id' index='0' name='endKey' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setEndKeyDocID:'>
+<arg declared_type='NSString*' index='0' name='endKeyDocID' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setGroupLevel:'>
+<arg declared_type='NSUInteger' index='0' name='groupLevel' type='I'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setIncludeDeleted:'>
+<arg declared_type='BOOL' index='0' name='includeDeleted' type='B'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setKeys:'>
+<arg declared_type='NSArray*' index='0' name='keys' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setLimit:'>
+<arg declared_type='NSUInteger' index='0' name='limit' type='I'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setPrefetch:'>
+<arg declared_type='BOOL' index='0' name='prefetch' type='B'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setSequences:'>
+<arg declared_type='BOOL' index='0' name='sequences' type='B'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setSkip:'>
+<arg declared_type='NSUInteger' index='0' name='skip' type='I'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setStale:'>
+<arg declared_type='CouchStaleness' index='0' name='stale' type='i'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setStartKey:'>
+<arg declared_type='id' index='0' name='startKey' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setStartKeyDocID:'>
+<arg declared_type='NSString*' index='0' name='startKeyDocID' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='skip'>
+<retval declared_type='NSUInteger' type='I'/>
+</method>
+<method selector='stale'>
+<retval declared_type='CouchStaleness' type='i'/>
+</method>
+<method selector='start'>
+<retval declared_type='RESTOperation*' type='@'/>
+</method>
+<method selector='startKey'>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='startKeyDocID'>
+<retval declared_type='NSString*' type='@'/>
+</method>
+</class>
+<class name='CouchQueryEnumerator'>
+<method selector='count'>
+<retval declared_type='NSUInteger' type='I'/>
+</method>
+<method selector='nextRow'>
+<retval declared_type='CouchQueryRow*' type='@'/>
+</method>
+<method selector='rowAtIndex:'>
+<arg declared_type='NSUInteger' index='0' name='index' type='I'/>
+<retval declared_type='CouchQueryRow*' type='@'/>
+</method>
+<method selector='sequenceNumber'>
+<retval declared_type='NSUInteger' type='I'/>
+</method>
+<method selector='totalCount'>
+<retval declared_type='NSUInteger' type='I'/>
+</method>
+</class>
+<class name='CouchQueryRow'>
+<method selector='document'>
+<retval declared_type='CouchDocument*' type='@'/>
+</method>
+<method selector='documentID'>
+<retval declared_type='NSString*' type='@'/>
+</method>
+<method selector='documentProperties'>
+<retval declared_type='NSDictionary*' type='@'/>
+</method>
+<method selector='documentRevision'>
+<retval declared_type='NSString*' type='@'/>
+</method>
+<method selector='key'>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='key0'>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='key1'>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='key2'>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='key3'>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='keyAtIndex:'>
+<arg declared_type='NSUInteger' index='0' name='index' type='I'/>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='localSequence'>
+<retval declared_type='UInt64' type='Q'/>
+</method>
+<method selector='sourceDocumentID'>
+<retval declared_type='NSString*' type='@'/>
+</method>
+<method selector='value'>
+<retval declared_type='id' type='@'/>
+</method>
+</class>
+<class name='CouchReplication'>
+<method selector='OAuth'>
+<retval declared_type='NSDictionary*' type='@'/>
+</method>
+<method selector='completed'>
+<retval declared_type='unsigned int' type='I'/>
+</method>
+<method selector='continuous'>
+<retval declared_type='_Bool' type='B'/>
+</method>
+<method selector='createTarget'>
+<retval declared_type='_Bool' type='B'/>
+</method>
+<method selector='currentRequests'>
+<retval declared_type='NSArray*' type='@'/>
+</method>
+<method selector='error'>
+<retval declared_type='NSError*' type='@'/>
+</method>
+<method selector='filter'>
+<retval declared_type='NSString*' type='@'/>
+</method>
+<method selector='filterParams'>
+<retval declared_type='NSDictionary*' type='@'/>
+</method>
+<method selector='headers'>
+<retval declared_type='NSDictionary*' type='@'/>
+</method>
+<method selector='localDatabase'>
+<retval declared_type='CouchDatabase*' type='@'/>
+</method>
+<method selector='mode'>
+<retval declared_type='CouchReplicationMode' type='i'/>
+</method>
+<method selector='options'>
+<retval declared_type='NSDictionary*' type='@'/>
+</method>
+<method selector='pull'>
+<retval declared_type='_Bool' type='B'/>
+</method>
+<method selector='remoteURL'>
+<retval declared_type='NSURL*' type='@'/>
+</method>
+<method selector='running'>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='setContinuous:'>
+<arg declared_type='_Bool' index='0' name='continuous' type='B'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setCreateTarget:'>
+<arg declared_type='_Bool' index='0' name='createTarget' type='B'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setFilter:'>
+<arg declared_type='NSString*' index='0' name='filter' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setFilterParams:'>
+<arg declared_type='NSDictionary*' index='0' name='filterParams' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setHeaders:'>
+<arg declared_type='NSDictionary*' index='0' name='headers' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setOAuth:'>
+<arg declared_type='NSDictionary*' index='0' name='OAuth' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setOptions:'>
+<arg declared_type='NSDictionary*' index='0' name='options' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='start'>
+<retval declared_type='RESTOperation*' type='@'/>
+</method>
+<method selector='status'>
+<retval declared_type='NSString*' type='@'/>
+</method>
+<method selector='stop'>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='total'>
+<retval declared_type='unsigned int' type='I'/>
+</method>
+</class>
+<class name='CouchResource'>
+<method selector='childWithPath:'>
+<arg declared_type='NSString*' index='0' name='relativePath' type='@'/>
+<retval declared_type='CouchResource*' type='@'/>
+</method>
+<method selector='database'>
+<retval declared_type='CouchDatabase*' type='@'/>
+</method>
+</class>
+<class name='CouchRevision'>
+<method selector='attachmentNamed:'>
+<arg declared_type='NSString*' index='0' name='name' type='@'/>
+<retval declared_type='CouchAttachment*' type='@'/>
+</method>
+<method selector='attachmentNames'>
+<retval declared_type='NSArray*' type='@'/>
+</method>
+<method selector='createAttachmentWithName:type:'>
+<arg declared_type='NSString*' index='0' name='name' type='@'/>
+<arg declared_type='NSString*' index='1' name='contentType' type='@'/>
+<retval declared_type='CouchAttachment*' type='@'/>
+</method>
+<method selector='document'>
+<retval declared_type='CouchDocument*' type='@'/>
+</method>
+<method selector='documentID'>
+<retval declared_type='NSString*' type='@'/>
+</method>
+<method selector='isCurrent'>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='isDeleted'>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='objectForKeyedSubscript:'>
+<arg declared_type='NSString*' index='0' name='key' type='@'/>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='properties'>
+<retval declared_type='NSDictionary*' type='@'/>
+</method>
+<method selector='propertiesAreLoaded'>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='propertyForKey:'>
+<arg declared_type='NSString*' index='0' name='key' type='@'/>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='putProperties:'>
+<arg declared_type='NSDictionary*' index='0' name='properties' type='@'/>
+<retval declared_type='RESTOperation*' type='@'/>
+</method>
+<method selector='revisionID'>
+<retval declared_type='NSString*' type='@'/>
+</method>
+<method selector='userProperties'>
+<retval declared_type='NSDictionary*' type='@'/>
+</method>
+</class>
+<class name='CouchServer'>
+<method selector='activeTasks'>
+<retval declared_type='NSArray*' type='@'/>
+</method>
+<method selector='activityPollInterval'>
+<retval declared_type='NSTimeInterval' type='d'/>
+</method>
+<method selector='checkActiveTasks'>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='close'>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='databaseNamed:'>
+<arg declared_type='NSString*' index='0' name='name' type='@'/>
+<retval declared_type='CouchDatabase*' type='@'/>
+</method>
+<method selector='generateDocumentID'>
+<retval declared_type='NSString*' type='@'/>
+</method>
+<method selector='generateUUIDs:'>
+<arg declared_type='NSUInteger' index='0' name='count' type='I'/>
+<retval declared_type='NSArray*' type='@'/>
+</method>
+<method selector='getDatabases'>
+<retval declared_type='NSArray*' type='@'/>
+</method>
+<method selector='getVersion:'>
+<arg declared_type='NSError**' index='0' name='outError' type='^@'/>
+<retval declared_type='NSString*' type='@'/>
+</method>
+<method selector='init'>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='initWithURL:'>
+<arg declared_type='NSURL*' index='0' name='url' type='@'/>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='objectForKeyedSubscript:'>
+<arg declared_type='NSString*' index='0' name='key' type='@'/>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='replications'>
+<retval declared_type='NSArray*' type='@'/>
+</method>
+<method selector='setActivityPollInterval:'>
+<arg declared_type='NSTimeInterval' index='0' name='activityPollInterval' type='d'/>
+<retval declared_type='void' type='v'/>
+</method>
+</class>
+<class name='CouchTouchDBServer'>
+<method selector='close'>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='error'>
+<retval declared_type='NSError*' type='@'/>
+</method>
+<method selector='init'>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='initWithServerPath:'>
+<arg declared_type='NSString*' index='0' name='serverPath' type='@'/>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='initWithServerPath:options:'>
+<arg declared_type='NSString*' index='0' name='serverPath' type='@'/>
+<arg const='true' declared_type='struct TDDatabaseManagerOptions*' index='1' name='options' type='^{TDDatabaseManagerOptions=}'/>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='initWithURL:'>
+<arg declared_type='NSURL*' index='0' name='url' type='@'/>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='sharedInstance' class_method='true'>
+<retval declared_type='CouchTouchDBServer*' type='@'/>
+</method>
+<method selector='tellTDDatabaseNamed:to:'>
+<arg declared_type='NSString*' index='0' name='dbName' type='@'/>
+<arg declared_type='void (^)(TDDatabase *)' index='1' name='block' type='@?' function_pointer='true'>
+<arg declared_type='TDDatabase*' type='@'/>
+<retval declared_type='void' type='v'/>
+</arg>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='tellTDServer:'>
+<arg declared_type='void (^)(TDServer *)' index='0' name='block' type='@?' function_pointer='true'>
+<arg declared_type='TDServer*' type='@'/>
+<retval declared_type='void' type='v'/>
+</arg>
+<retval declared_type='void' type='v'/>
+</method>
+</class>
+<class name='CouchUITableSource'>
+<method selector='deleteDocuments:'>
+<arg declared_type='NSArray*' index='0' name='documents' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='deleteDocumentsAtIndexes:'>
+<arg declared_type='NSArray*' index='0' name='indexPaths' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='deletionAllowed'>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='documentAtIndexPath:'>
+<arg declared_type='NSIndexPath*' index='0' name='path' type='@'/>
+<retval declared_type='CouchDocument*' type='@'/>
+</method>
+<method selector='indexPathForDocument:'>
+<arg declared_type='CouchDocument*' index='0' name='document' type='@'/>
+<retval declared_type='NSIndexPath*' type='@'/>
+</method>
+<method selector='labelProperty'>
+<retval declared_type='NSString*' type='@'/>
+</method>
+<method selector='query'>
+<retval declared_type='CouchLiveQuery*' type='@'/>
+</method>
+<method selector='reloadFromQuery'>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='rowAtIndex:'>
+<arg declared_type='NSUInteger' index='0' name='index' type='I'/>
+<retval declared_type='CouchQueryRow*' type='@'/>
+</method>
+<method selector='rows'>
+<retval declared_type='NSArray*' type='@'/>
+</method>
+<method selector='setDeletionAllowed:'>
+<arg declared_type='BOOL' index='0' name='deletionAllowed' type='B'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setLabelProperty:'>
+<arg declared_type='NSString*' index='0' name='labelProperty' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setQuery:'>
+<arg declared_type='CouchLiveQuery*' index='0' name='query' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setTableView:'>
+<arg declared_type='UITableView*' index='0' name='tableView' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='tableView'>
+<retval declared_type='UITableView*' type='@'/>
+</method>
+</class>
+<class name='NSObject'>
+<method selector='couchDocumentChanged:'>
+<arg declared_type='CouchDocument*' index='0' name='doc' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='couchTableSource:cellForRowAtIndexPath:'>
+<arg declared_type='CouchUITableSource*' index='0' name='source' type='@'/>
+<arg declared_type='NSIndexPath*' index='1' name='indexPath' type='@'/>
+<retval declared_type='UITableViewCell*' type='@'/>
+</method>
+<method selector='couchTableSource:operationFailed:'>
+<arg declared_type='CouchUITableSource*' index='0' name='source' type='@'/>
+<arg declared_type='RESTOperation*' index='1' name='op' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='couchTableSource:updateFromQuery:previousRows:'>
+<arg declared_type='CouchUITableSource*' index='0' name='source' type='@'/>
+<arg declared_type='CouchLiveQuery*' index='1' name='query' type='@'/>
+<arg declared_type='NSArray*' index='2' name='previousRows' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='couchTableSource:willUpdateFromQuery:'>
+<arg declared_type='CouchUITableSource*' index='0' name='source' type='@'/>
+<arg declared_type='CouchLiveQuery*' index='1' name='query' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='couchTableSource:willUseCell:forRow:'>
+<arg declared_type='CouchUITableSource*' index='0' name='source' type='@'/>
+<arg declared_type='UITableViewCell*' index='1' name='cell' type='@'/>
+<arg declared_type='CouchQueryRow*' index='2' name='row' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='resource:didReceiveResponse:'>
+<arg declared_type='RESTResource*' index='0' name='resource' type='@'/>
+<arg declared_type='NSHTTPURLResponse*' index='1' name='response' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='resource:willSendRequest:'>
+<arg declared_type='RESTResource*' index='0' name='resource' type='@'/>
+<arg declared_type='NSMutableURLRequest*' index='1' name='request' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+</class>
+<class name='RESTBody'>
+<method selector='JSONObjectWithData:' class_method='true'>
+<arg declared_type='NSData*' index='0' name='data' type='@'/>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='JSONObjectWithDate:' class_method='true'>
+<arg declared_type='NSDate*' index='0' name='date' type='@'/>
+<retval declared_type='NSString*' type='@'/>
+</method>
+<method selector='JSONObjectWithString:' class_method='true'>
+<arg declared_type='NSString*' index='0' name='string' type='@'/>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='asString'>
+<retval declared_type='NSString*' type='@'/>
+</method>
+<method selector='base64WithData:' class_method='true'>
+<arg declared_type='NSData*' index='0' name='data' type='@'/>
+<retval declared_type='NSString*' type='@'/>
+</method>
+<method selector='content'>
+<retval declared_type='NSData*' type='@'/>
+</method>
+<method selector='contentType'>
+<retval declared_type='NSString*' type='@'/>
+</method>
+<method selector='dataWithBase64:' class_method='true'>
+<arg declared_type='NSString*' index='0' name='base64' type='@'/>
+<retval declared_type='NSData*' type='@'/>
+</method>
+<method selector='dataWithJSONObject:' class_method='true'>
+<arg declared_type='id' index='0' name='obj' type='@'/>
+<retval declared_type='NSData*' type='@'/>
+</method>
+<method selector='dateWithJSONObject:' class_method='true'>
+<arg declared_type='id' index='0' name='jsonObject' type='@'/>
+<retval declared_type='NSDate*' type='@'/>
+</method>
+<method selector='eTag'>
+<retval declared_type='NSString*' type='@'/>
+</method>
+<method selector='entityHeadersFrom:' class_method='true'>
+<arg declared_type='NSDictionary*' index='0' name='headers' type='@'/>
+<retval declared_type='NSDictionary*' type='@'/>
+</method>
+<method selector='fromJSON'>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='headers'>
+<retval declared_type='NSDictionary*' type='@'/>
+</method>
+<method selector='initWithContent:headers:resource:'>
+<arg declared_type='NSData*' index='0' name='content' type='@'/>
+<arg declared_type='NSDictionary*' index='1' name='headers' type='@'/>
+<arg declared_type='RESTResource*' index='2' name='resource' type='@'/>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='initWithData:contentType:'>
+<arg declared_type='NSData*' index='0' name='content' type='@'/>
+<arg declared_type='NSString*' index='1' name='contentType' type='@'/>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='lastModified'>
+<retval declared_type='NSString*' type='@'/>
+</method>
+<method selector='prettyStringWithJSONObject:' class_method='true'>
+<arg declared_type='id' index='0' name='obj' type='@'/>
+<retval declared_type='NSString*' type='@'/>
+</method>
+<method selector='resource'>
+<retval declared_type='RESTResource*' type='@'/>
+</method>
+<method selector='stringWithJSONObject:' class_method='true'>
+<arg declared_type='id' index='0' name='obj' type='@'/>
+<retval declared_type='NSString*' type='@'/>
+</method>
+</class>
+<class name='RESTCache'>
+<method selector='addResource:'>
+<arg declared_type='RESTResource*' index='0' name='resource' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='allCachedResources'>
+<retval declared_type='NSArray*' type='@'/>
+</method>
+<method selector='forgetAllResources'>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='forgetResource:'>
+<arg declared_type='RESTResource*' index='0' name='resource' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='init'>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='initWithRetainLimit:'>
+<arg declared_type='NSUInteger' index='0' name='retainLimit' type='I'/>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='resourceWithRelativePath:'>
+<arg declared_type='NSString*' index='0' name='relativePath' type='@'/>
+<retval declared_type='RESTResource*' type='@'/>
+</method>
+<method selector='unretainResources'>
+<retval declared_type='void' type='v'/>
+</method>
+</class>
+<class name='RESTMutableBody'>
+<method selector='content'>
+<retval declared_type='NSData*' type='@'/>
+</method>
+<method selector='contentType'>
+<retval declared_type='NSString*' type='@'/>
+</method>
+<method selector='headers'>
+<retval declared_type='NSDictionary*' type='@'/>
+</method>
+<method selector='mutableHeaders'>
+<retval declared_type='NSMutableDictionary*' type='@'/>
+</method>
+<method selector='resource'>
+<retval declared_type='RESTResource*' type='@'/>
+</method>
+<method selector='setContent:'>
+<arg declared_type='NSData*' index='0' name='content' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setContentType:'>
+<arg declared_type='NSString*' index='0' name='contentType' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setHeaders:'>
+<arg declared_type='NSDictionary*' index='0' name='headers' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setMutableHeaders:'>
+<arg declared_type='NSMutableDictionary*' index='0' name='mutableHeaders' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setResource:'>
+<arg declared_type='RESTResource*' index='0' name='resource' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+</class>
+<class name='RESTOperation'>
+<method selector='URL'>
+<retval declared_type='NSURL*' type='@'/>
+</method>
+<method selector='cancel'>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='dump'>
+<retval declared_type='NSString*' type='@'/>
+</method>
+<method selector='error'>
+<retval declared_type='NSError*' type='@'/>
+</method>
+<method selector='httpStatus'>
+<retval declared_type='int' type='i'/>
+</method>
+<method selector='initWithResource:request:'>
+<arg declared_type='RESTResource*' index='0' name='resource' type='@'/>
+<arg declared_type='NSURLRequest*' index='1' name='request' type='@'/>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='isComplete'>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='isDELETE'>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='isGET'>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='isPOST'>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='isPUT'>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='isReadOnly'>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='isSuccessful'>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='method'>
+<retval declared_type='NSString*' type='@'/>
+</method>
+<method selector='name'>
+<retval declared_type='NSString*' type='@'/>
+</method>
+<method selector='onCompletion:'>
+<arg declared_type='OnCompleteBlock' index='0' name='onComplete' type='@?' function_pointer='true'>
+<retval declared_type='void' type='v'/>
+</arg>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='request'>
+<retval declared_type='NSURLRequest*' type='@'/>
+</method>
+<method selector='requestBody'>
+<retval declared_type='NSData*' type='@'/>
+</method>
+<method selector='resource'>
+<retval declared_type='RESTResource*' type='@'/>
+</method>
+<method selector='response'>
+<retval declared_type='NSHTTPURLResponse*' type='@'/>
+</method>
+<method selector='responseBody'>
+<retval declared_type='RESTBody*' type='@'/>
+</method>
+<method selector='responseHeaders'>
+<retval declared_type='NSDictionary*' type='@'/>
+</method>
+<method selector='resultObject'>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='setRequestBody:'>
+<arg declared_type='NSData*' index='0' name='requestBody' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setResultObject:'>
+<arg declared_type='id' index='0' name='resultObject' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setValue:forHeader:'>
+<arg declared_type='NSString*' index='0' name='value' type='@'/>
+<arg declared_type='NSString*' index='1' name='headerName' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='start'>
+<retval declared_type='RESTOperation*' type='@'/>
+</method>
+<method selector='wait'>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='wait:' class_method='true'>
+<arg declared_type='NSSet*' index='0' name='operations' type='@'/>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='wait:'>
+<arg declared_type='NSError**' index='0' name='outError' type='^@'/>
+<retval declared_type='BOOL' type='B'/>
+</method>
+</class>
+<class name='RESTResource'>
+<method selector='DELETE'>
+<retval declared_type='RESTOperation*' type='@'/>
+</method>
+<method selector='GET'>
+<retval declared_type='RESTOperation*' type='@'/>
+</method>
+<method selector='POST:parameters:'>
+<arg declared_type='NSData*' index='0' name='body' type='@'/>
+<arg declared_type='NSDictionary*' index='1' name='parameters' type='@'/>
+<retval declared_type='RESTOperation*' type='@'/>
+</method>
+<method selector='POSTJSON:parameters:'>
+<arg declared_type='id' index='0' name='body' type='@'/>
+<arg declared_type='NSDictionary*' index='1' name='parameters' type='@'/>
+<retval declared_type='RESTOperation*' type='@'/>
+</method>
+<method selector='PUT:parameters:'>
+<arg declared_type='NSData*' index='0' name='body' type='@'/>
+<arg declared_type='NSDictionary*' index='1' name='parameters' type='@'/>
+<retval declared_type='RESTOperation*' type='@'/>
+</method>
+<method selector='PUTJSON:parameters:'>
+<arg declared_type='id' index='0' name='body' type='@'/>
+<arg declared_type='NSDictionary*' index='1' name='parameters' type='@'/>
+<retval declared_type='RESTOperation*' type='@'/>
+</method>
+<method selector='URL'>
+<retval declared_type='NSURL*' type='@'/>
+</method>
+<method selector='activeOperations'>
+<retval declared_type='NSSet*' type='@'/>
+</method>
+<method selector='cacheResponse:'>
+<arg declared_type='RESTOperation*' index='0' name='operation' type='@'/>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='cachedURL'>
+<retval declared_type='NSURL*' type='@'/>
+</method>
+<method selector='createdByPOST:'>
+<arg declared_type='RESTOperation*' index='0' name='op' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='delegate'>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='eTag'>
+<retval declared_type='NSString*' type='@'/>
+</method>
+<method selector='initUntitledWithParent:'>
+<arg declared_type='RESTResource*' index='0' name='parent' type='@'/>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='initWithParent:relativePath:'>
+<arg declared_type='RESTResource*' index='0' name='parent' type='@'/>
+<arg declared_type='NSString*' index='1' name='path' type='@'/>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='initWithURL:'>
+<arg declared_type='NSURL*' index='0' name='url' type='@'/>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='lastModified'>
+<retval declared_type='NSString*' type='@'/>
+</method>
+<method selector='operation:willCompleteWithError:'>
+<arg declared_type='RESTOperation*' index='0' name='op' type='@'/>
+<arg declared_type='NSError*' index='1' name='error' type='@'/>
+<retval declared_type='NSError*' type='@'/>
+</method>
+<method selector='operationDidComplete:'>
+<arg declared_type='RESTOperation*' index='0' name='op' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='operationDidStart:'>
+<arg declared_type='RESTOperation*' index='0' name='op' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='parent'>
+<retval declared_type='RESTResource*' type='@'/>
+</method>
+<method selector='relativePath'>
+<retval declared_type='NSString*' type='@'/>
+</method>
+<method selector='requestWithMethod:parameters:'>
+<arg declared_type='NSString*' index='0' name='method' type='@'/>
+<arg declared_type='NSDictionary*' index='1' name='parameters' type='@'/>
+<retval declared_type='NSMutableURLRequest*' type='@'/>
+</method>
+<method selector='sendHTTP:parameters:'>
+<arg declared_type='NSString*' index='0' name='method' type='@'/>
+<arg declared_type='NSDictionary*' index='1' name='parameters' type='@'/>
+<retval declared_type='RESTOperation*' type='@'/>
+</method>
+<method selector='sendRequest:'>
+<arg declared_type='NSURLRequest*' index='0' name='request' type='@'/>
+<retval declared_type='RESTOperation*' type='@'/>
+</method>
+<method selector='setCachedURL:'>
+<arg declared_type='NSURL*' index='0' name='cachedURL' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setCredential:'>
+<arg declared_type='NSURLCredential*' index='0' name='credential' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setDelegate:'>
+<arg declared_type='id' index='0' name='delegate' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setETag:'>
+<arg declared_type='NSString*' index='0' name='eTag' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setLastModified:'>
+<arg declared_type='NSString*' index='0' name='lastModified' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setProtectionSpace:'>
+<arg declared_type='NSURLProtectionSpace*' index='0' name='protectionSpace' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setTracksActiveOperations:'>
+<arg declared_type='BOOL' index='0' name='tracksActiveOperations' type='B'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='tracksActiveOperations'>
+<retval declared_type='BOOL' type='B'/>
+</method>
+</class>
+<informal_protocol name='CouchDocumentModel'>
+<method selector='couchDocumentChanged:' type='v12@0:4@8'>
+<arg declared_type='CouchDocument*' index='0' name='doc' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+</informal_protocol>
+<informal_protocol name='CouchUITableDelegate'>
+<method selector='couchTableSource:cellForRowAtIndexPath:' type='@16@0:4@8@12'>
+<arg declared_type='CouchUITableSource*' index='0' name='source' type='@'/>
+<arg declared_type='NSIndexPath*' index='1' name='indexPath' type='@'/>
+<retval declared_type='UITableViewCell*' type='@'/>
+</method>
+<method selector='couchTableSource:operationFailed:' type='v16@0:4@8@12'>
+<arg declared_type='CouchUITableSource*' index='0' name='source' type='@'/>
+<arg declared_type='RESTOperation*' index='1' name='op' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='couchTableSource:updateFromQuery:previousRows:' type='v20@0:4@8@12@16'>
+<arg declared_type='CouchUITableSource*' index='0' name='source' type='@'/>
+<arg declared_type='CouchLiveQuery*' index='1' name='query' type='@'/>
+<arg declared_type='NSArray*' index='2' name='previousRows' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='couchTableSource:willUpdateFromQuery:' type='v16@0:4@8@12'>
+<arg declared_type='CouchUITableSource*' index='0' name='source' type='@'/>
+<arg declared_type='CouchLiveQuery*' index='1' name='query' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='couchTableSource:willUseCell:forRow:' type='v20@0:4@8@12@16'>
+<arg declared_type='CouchUITableSource*' index='0' name='source' type='@'/>
+<arg declared_type='UITableViewCell*' index='1' name='cell' type='@'/>
+<arg declared_type='CouchQueryRow*' index='2' name='row' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+</informal_protocol>
+<informal_protocol name='RESTResourceDelegate'>
+<method selector='resource:didReceiveResponse:' type='v16@0:4@8@12'>
+<arg declared_type='RESTResource*' index='0' name='resource' type='@'/>
+<arg declared_type='NSHTTPURLResponse*' index='1' name='response' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='resource:willSendRequest:' type='v16@0:4@8@12'>
+<arg declared_type='RESTResource*' index='0' name='resource' type='@'/>
+<arg declared_type='NSMutableURLRequest*' index='1' name='request' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+</informal_protocol>
+</signatures>
