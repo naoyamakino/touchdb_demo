@@ -37,9 +37,12 @@ class AppDelegate
 
   def defineViewByFirstName
     doc = @database.untitledDocument #I don't know how to get a proper document
+    #according to https://github.com/couchbaselabs/TouchDB-iOS/wiki/Guide%3A-Views
+    #mapBlock takes two argument, doc which is An NSDictionary -- this is the contents of the document being indexed.
+    #and emit function. but right now I am passing untitledDocument, which has nothing to being indexed.
+    #Do I have to iterate all documents (i.e from getAllDocuments) and call defineViewNamed:mapBlock:version for each document?
     @design.defineViewNamed("by_first_name", mapBlock:lambda do |doc, emit|
-      first_name = doc.objectForKey("first_name")
-      emit(first_name, doc) unless first_name.nil?
+      emit('', doc)
     end, version:"1.0")
   end
   def query_by_first_name
