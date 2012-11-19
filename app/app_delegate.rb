@@ -7,7 +7,6 @@ class AppDelegate
     unless @database.ensureCreated(error)
       raise "database failed to be created"
     end
-
     true
   end
 
@@ -23,6 +22,15 @@ class AppDelegate
       raise "couldn't save the new item"
     else
       puts "#{content.inspect} has been saved."
+    end
+  end
+
+  def getAllDocuments(option = {})
+    query = @database.getAllDocuments
+    query.limit = option[:limit] unless option[:limit].nil?
+    query.descending = option[:descending] unless option[:descending].nil?
+    query.rows.each do |row|
+      puts "#{row.documentProperties.inspect}"
     end
   end
 end
