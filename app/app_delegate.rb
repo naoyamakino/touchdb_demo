@@ -11,11 +11,15 @@ class AppDelegate
     true
   end
 
-  #TODO how to make it run the operation asynchronously?
   def createDocument(content)
     doc = @database.untitledDocument
     op = doc.putProperties(content)
-    if !op.wait
+    op.onCompletion(onCompletion(op, content))
+    op.start
+  end
+
+  def onCompletion(op, content)
+    if op.error
       raise "couldn't save the new item"
     else
       puts "#{content.inspect} has been saved."
