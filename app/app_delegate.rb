@@ -1,4 +1,5 @@
 class AppDelegate
+  attr_accessor :design, :database, :server
   def application(application, didFinishLaunchingWithOptions:launchOptions)
     @server = CouchTouchDBServer.sharedInstance
     raise "CouchTouchDBServer failed to start: #{@server.error}" if @server.error
@@ -36,7 +37,9 @@ class AppDelegate
   end
 
   def mapBlock
-    return lambda { |doc, emit| emit(1, doc) }
+   "^(NSDictionary* doc, void (^emit)(id key, id value)) {
+    emit(1, doc);
+}"
   end
 
   def defineViewByFirstName
@@ -46,4 +49,7 @@ class AppDelegate
     query = @design.queryViewNamed("first_name")
   end
 
+  def defineView
+    @design.defineViewNamed("another_view", map:mapBlock)
+  end
 end
