@@ -1,0 +1,8 @@
+this is a demo app that tries to illustrate how to run touchdb with rubymotion.
+
+unfortunately I hit the dead end with current rubymotion limitation (v 1.29).
+Invoking an Objective-C block from Ruby is not currently supported with rubymotion.
+"The problem is that the map block is passed a parameter called ‘emit’ that’s a block the map function needs to call. If you have a Ruby map function, you’re getting some kind of generic Ruby wrapper around the block, with no way to call it."
+https://groups.google.com/forum/?fromgroups=#!topic/mobile-couchbase/Atz8Jvj0B-I
+
+Please see app/app_delegate.rb for my attempts. I would like to come back again once this is addressed.
